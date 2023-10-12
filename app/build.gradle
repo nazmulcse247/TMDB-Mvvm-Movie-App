@@ -49,7 +49,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 
-    implementation "androidx.activity:activity-ktx:1.7.2"
+    implementation "androidx.activity:activity-ktx:1.8.0"
     implementation "androidx.fragment:fragment-ktx:1.6.1"
 
     //Dagger-Hilt Dependencies
@@ -83,6 +83,16 @@ dependencies {
     def nav_version = "2.5.2"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //ShimmerEffect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    //Scalable Size Unit
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
 
 

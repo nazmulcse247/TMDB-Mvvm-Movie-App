@@ -17,9 +17,9 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class PopularTvShowFragment : BaseFragment<FragmentPopularTvShowBinding>() {
-    override fun viewBindingLayout(): FragmentPopularTvShowBinding = FragmentPopularTvShowBinding.inflate(layoutInflater)
 
     private val viewModel : MovieViewModel by viewModels()
+    override fun viewBindingLayout(): FragmentPopularTvShowBinding = FragmentPopularTvShowBinding.inflate(layoutInflater)
 
     override fun initializeView(savedInstanceState: Bundle?) {
         getPopularUIObserver()
@@ -30,10 +30,10 @@ class PopularTvShowFragment : BaseFragment<FragmentPopularTvShowBinding>() {
             viewModel.popularMovie.collectLatest {
                 when(it){
                     is Resource.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.discoverLoading.startShimmer()
                     }
                     is Resource.Success -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.discoverLoading.stopShimmer()
                         Toast.makeText(requireContext(), ""+it.data.results.size, Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Error -> {
