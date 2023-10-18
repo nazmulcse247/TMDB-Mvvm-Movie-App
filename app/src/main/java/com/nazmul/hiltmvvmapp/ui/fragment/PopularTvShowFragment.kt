@@ -34,6 +34,7 @@ class PopularTvShowFragment : BaseFragment<FragmentPopularTvShowBinding>() {
                     }
                     is Resource.Success -> {
                         binding.discoverLoading.stopShimmer()
+                        binding.discoverLoading.visibility = View.GONE
                         Toast.makeText(requireContext(), ""+it.data.results.size, Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Error -> {

@@ -19,9 +19,9 @@ class BaseApplication : Application(){
     private fun setupTimber() {
 
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
-            .showThreadInfo(true) // (Optional) Whether to show thread info or not. Default true
+            .showThreadInfo(false) // (Optional) Whether to show thread info or not. Default true
             .methodCount(1) // (Optional) How many method line to show. Default 2
-            .methodOffset(5) // Set methodOffset to 5 in order to hide internal method calls
+            .methodOffset(2) // Set methodOffset to 5 in order to hide internal method calls
             .tag("PRETTY_LOGGER") // To replace the default PRETTY_LOGGER tag with a dash (-).
             .build()
 
