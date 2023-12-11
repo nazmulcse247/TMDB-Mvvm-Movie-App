@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.nazmul.hiltmvvmapp.common.Resource
+import com.nazmul.hiltmvvmapp.common.adapter.PopularTvShowAdapter
+import com.nazmul.hiltmvvmapp.common.setUpGridRecyclerView
 import com.nazmul.hiltmvvmapp.databinding.FragmentPopularTvShowBinding
 import com.nazmul.hiltmvvmapp.ui.base.BaseFragment
 import com.nazmul.hiltmvvmapp.viewmodel.MovieViewModel
@@ -19,9 +21,15 @@ import timber.log.Timber
 class PopularTvShowFragment : BaseFragment<FragmentPopularTvShowBinding>() {
 
     private val viewModel : MovieViewModel by viewModels()
+
     override fun viewBindingLayout(): FragmentPopularTvShowBinding = FragmentPopularTvShowBinding.inflate(layoutInflater)
 
+    private val popularTvShowAdapter = PopularTvShowAdapter{
+        Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+    }
+
     override fun initializeView(savedInstanceState: Bundle?) {
+        requireActivity().setUpGridRecyclerView(binding.rvPopularTvShow,popularTvShowAdapter,2)
         getPopularUIObserver()
     }
 
@@ -36,6 +44,8 @@ class PopularTvShowFragment : BaseFragment<FragmentPopularTvShowBinding>() {
                         binding.discoverLoading.stopShimmer()
                         binding.discoverLoading.visibility = View.GONE
                         Toast.makeText(requireContext(), ""+it.data.results.size, Toast.LENGTH_SHORT).show()
+                        popularTvShowAdapter.submitList(it.data.results)
+                        binding.rvPopularTvShow.visibility = View.VISIBLE
                     }
                     is Resource.Error -> {
                         Timber.tag("tag").d("getPopularUIObserver%s", it.throwable.localizedMessage)
