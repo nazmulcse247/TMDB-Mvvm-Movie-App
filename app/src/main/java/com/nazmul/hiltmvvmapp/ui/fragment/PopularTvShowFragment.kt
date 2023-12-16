@@ -43,12 +43,13 @@ class PopularTvShowFragment : BaseFragment<FragmentPopularTvShowBinding>() {
                     is Resource.Success -> {
                         binding.discoverLoading.stopShimmer()
                         binding.discoverLoading.visibility = View.GONE
+                        binding.rvPopularTvShow.visibility = View.VISIBLE
                         Toast.makeText(requireContext(), ""+it.data.results.size, Toast.LENGTH_SHORT).show()
                         popularTvShowAdapter.submitList(it.data.results)
-                        binding.rvPopularTvShow.visibility = View.VISIBLE
+
                     }
                     is Resource.Error -> {
-                        Timber.tag("tag").d("getPopularUIObserver%s", it.throwable.localizedMessage)
+
                     }
                 }
             }
