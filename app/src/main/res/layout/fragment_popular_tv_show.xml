@@ -6,6 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.PopularTvShowFragment">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Popular TV Show"
+        android:background="@color/red"
+        app:titleTextColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/discoverLoading"
         android:layout_width="match_parent"
@@ -13,7 +23,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:visibility="visible">
 
         <LinearLayout
@@ -35,12 +45,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_popular_tv_show"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_6sdp"
         android:clipToPadding="false"
         android:paddingBottom="@dimen/_10sdp"
         android:paddingTop="@dimen/_10sdp"
@@ -49,6 +56,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

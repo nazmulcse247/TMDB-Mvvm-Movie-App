@@ -44,7 +44,6 @@ class PopularTvShowFragment : BaseFragment<FragmentPopularTvShowBinding>() {
                         binding.discoverLoading.stopShimmer()
                         binding.discoverLoading.visibility = View.GONE
                         binding.rvPopularTvShow.visibility = View.VISIBLE
-                        Toast.makeText(requireContext(), ""+it.data.results.size, Toast.LENGTH_SHORT).show()
                         popularTvShowAdapter.submitList(it.data.results)
 
                     }

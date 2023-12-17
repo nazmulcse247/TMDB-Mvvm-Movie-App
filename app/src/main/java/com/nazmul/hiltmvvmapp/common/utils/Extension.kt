@@ -8,6 +8,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.nazmul.hiltmvvmapp.R
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
 
 fun ImageView.loadImage(url : String, imageTypeEnum: ImageTypeEnum) {
 
@@ -38,4 +41,11 @@ fun Context.circularProgressDrawable(): Drawable {
         )
         start()
     }
+}
+
+fun Double.format(digits: Int): String {
+    val df = DecimalFormat()
+    df.decimalFormatSymbols = DecimalFormatSymbols(Locale.US)
+    df.maximumFractionDigits = digits
+    return df.format(this)
 }

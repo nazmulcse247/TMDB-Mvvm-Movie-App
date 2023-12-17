@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.nazmul.hiltmvvmapp.common.AppConstraits.IMAGE_BASE_URL
 import com.nazmul.hiltmvvmapp.common.utils.ImageTypeEnum
+import com.nazmul.hiltmvvmapp.common.utils.format
 import com.nazmul.hiltmvvmapp.common.utils.loadImage
 import com.nazmul.hiltmvvmapp.data.Result
 import com.nazmul.hiltmvvmapp.databinding.PopularTvShowItemBinding
@@ -30,8 +31,12 @@ class PopularTvShowAdapter(
         LayoutInflater.from(parent.context),parent,false)
 
     override fun bind(binding: PopularTvShowItemBinding, item: Result, position: Int) {
-        binding.root.setOnClickListener(onClick)
-        Timber.d("bind: %s", IMAGE_BASE_URL+item.poster_path)
-        binding.imageView.loadImage(IMAGE_BASE_URL+item.poster_path,ImageTypeEnum.REGULAR)
+        with(binding){
+            root.setOnClickListener(onClick)
+            imageView.loadImage(IMAGE_BASE_URL+item.poster_path,ImageTypeEnum.REGULAR)
+            voteAverageTV.text = item.vote_average.format(1)
+
+        }
+
     }
 }

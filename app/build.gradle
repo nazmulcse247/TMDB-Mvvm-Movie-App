@@ -36,6 +36,9 @@ android {
     viewBinding {
         enabled = true
     }
+    lintOptions {
+        disable 'GradleDependency'
+    }
 }
 
 dependencies {
@@ -54,9 +57,9 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.6.1"
 
     //Dagger-Hilt Dependencies
-    implementation 'com.google.dagger:hilt-android:2.42'
+    implementation 'com.google.dagger:hilt-android:2.44.2'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
-    kapt 'com.google.dagger:hilt-compiler:2.42'
+    kapt 'com.google.dagger:hilt-compiler:2.44.2'
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
     //Timber
@@ -76,19 +79,18 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
     // Coroutine Lifecycle Scopes
-    def lifecycle_version = "2.5.1"
+    def lifecycle_version = "2.6.2"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
     //Navigation Components
-    def nav_version = "2.5.2"
+    def nav_version = "2.7.6"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //ShimmerEffect
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
-    //Glide
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     kapt 'com.github.bumptech.glide:compiler:4.14.2'
