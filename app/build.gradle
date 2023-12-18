@@ -99,6 +99,10 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.1.0'
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
+    //Paging3
+    def paging_version = "3.2.1"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
 
 
 }

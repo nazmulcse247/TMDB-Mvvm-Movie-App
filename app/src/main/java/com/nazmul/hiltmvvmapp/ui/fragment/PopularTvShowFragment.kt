@@ -50,6 +50,8 @@ class PopularTvShowFragment : BaseFragment<FragmentPopularTvShowBinding>() {
                     is Resource.Error -> {
 
                     }
+
+                    else -> {}
                 }
             }
         }
