@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.nazmul.hiltmvvmapp.R
+import com.nazmul.hiltmvvmapp.common.adapter.LoadStateAdapter
 import com.nazmul.hiltmvvmapp.common.adapter.NowPlayingAdapter
 import com.nazmul.hiltmvvmapp.common.setUpGridRecyclerView
 import com.nazmul.hiltmvvmapp.databinding.FragmentNowPlayingBinding
@@ -41,7 +42,17 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding>() {
             with(binding){
                 viewLifecycleOwner.lifecycleScope.launch {
                     nowPlayingMovie.collectLatest {
-                        rvNowPlayingMovie.adapter = adapterNowPlayingMovies
+
+                        // Creating Contact Adapter For Paging Footer Span Count
+                        val nowPlayingAdapter = adapterNowPlayingMovies.withLoadStateFooter(
+                            footer = LoadStateAdapter {
+                                adapterNowPlayingMovies.retry()
+                            }
+                        )
+
+                        requireActivity().setUpGridRecyclerView(rvNowPlayingMovie,adapterNowPlayingMovies,2)
+
+                        rvNowPlayingMovie.adapter = nowPlayingAdapter
                         adapterNowPlayingMovies.submitData(lifecycle,it)
 
                         adapterNowPlayingMovies.loadStateFlow.collectLatest { loadStates ->
