@@ -8,6 +8,7 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nazmul.hiltmvvmapp.databinding.LoadStateViewBinding
 import okio.IOException
+import timber.log.Timber
 
 class LoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<com.nazmul.hiltmvvmapp.common.adapter.LoadStateAdapter.LoadStateAdapterViewHolder>() {
 
@@ -28,24 +29,10 @@ class LoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<com.naz
     class LoadStateAdapterViewHolder(private val binding: LoadStateViewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(loadState: LoadState, retry: () -> Unit) {
             with(binding) {
-                loadStateRetry.isVisible = loadState !is LoadState.Loading
-                loadStateErrorMessage.isVisible = loadState !is LoadState.Loading
                 loadStateProgress.isVisible = loadState is LoadState.Loading
 
                 if (loadState is LoadState.Error) {
-                    when (loadState.error) {
-                        is IOException -> {
-                            loadStateErrorMessage.text = "Network Error"
-                        }
-                        else -> {
-                            loadStateErrorMessage.text = "Something went wrong"
-                        }
-
-                    }
-                }
-
-                loadStateRetry.setOnClickListener {
-                    retry.invoke()
+                   Timber.d("Error: ${loadState.error.localizedMessage}")
                 }
 
             }

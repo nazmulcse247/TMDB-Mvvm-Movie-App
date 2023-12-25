@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.GridLayoutManager
 import com.nazmul.hiltmvvmapp.R
 import com.nazmul.hiltmvvmapp.common.adapter.LoadStateAdapter
 import com.nazmul.hiltmvvmapp.common.adapter.NowPlayingAdapter
@@ -34,7 +35,7 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding>() {
     }
 
     private fun onClickMovieItem(movie: Int) {
-       showToastMessage("Clicked")
+       showToastMessage("Clicked$movie")
     }
 
     private fun getNowPlayingUIObserver() {
@@ -50,7 +51,17 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding>() {
                             }
                         )
 
-                        requireActivity().setUpGridRecyclerView(rvNowPlayingMovie,adapterNowPlayingMovies,2)
+                        rvNowPlayingMovie.layoutManager =
+                            GridLayoutManager(context, 2).apply {
+                                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                                    override fun getSpanSize(position: Int): Int {
+                                        return if (nowPlayingAdapter.getItemViewType(position) in
+                                            arrayOf(1)
+                                        ) spanCount else 1
+                                    }
+
+                                }
+                            }
 
                         rvNowPlayingMovie.adapter = nowPlayingAdapter
                         adapterNowPlayingMovies.submitData(lifecycle,it)
